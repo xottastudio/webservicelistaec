@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista Instituciones EC</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+	<link href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+	<link href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.bootstrap5.min.css" rel="stylesheet">
+
+	<!-- PRIMER BUSCADOR 
+	<style>
+		.search-container { max-width: 400px; margin-bottom: 20px; }
+	</style>
+	-->
+</head>
+<body class="container mt-5">
+	<center><h2 class="mb-4">Instituciones Públicas de Ecuador</h2></center>
+ 
+	<div th:if="${#lists.isEmpty(listaInstituciones)}" class="alert alert-warning">
+		No se pudieron cargar las instituciones en este momento.
+	</div>
+	
+	<!-- PRIMER BUSCADOR 
+	<div class="row mb-3">
+	    <div class="col-md-7">
+	        <input type="text" id="buscador" class="form-control" placeholder="Escriba el nombre de la institución para filtrar...">
+	    </div>
+	</div>
+	-->
+	
+	<table th:if="${!#lists.isEmpty(listaInstituciones)}" class="table table-striped table-hover border" id="tablaInstituciones">			
+        <thead class="table-dark">
+            <tr>
+                <th>Institucion</th>
+                <th>Siglas</th>
+				<th>URL</th>
+                <th>Descripción</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="inst : ${listaInstituciones}">
+                <td th:text="${inst.institucion}"></td>
+                <td th:text="${inst.siglas}"></td>
+				<td th:text="${inst.url}"></td>
+                <td th:text="${inst.descripcion}"></td>
+            </tr>
+        </tbody>
+    </table>
+	
+	</table>
+	
+	<!--ESTE SCRIPT ES PARA AÑADIR UN BUSCADOR, SE COMENTA PORQUE AÑADIMOS UN TABLE AVANZADO
+	<script>
+	    document.getElementById('buscador').addEventListener('keyup', function() {
+	        // 1. Obtener el texto del buscador y pasarlo a minúsculas
+	        let filtro = this.value.toLowerCase();
+	        
+	        // 2. Obtener todas las filas de la tabla (excepto el encabezado)
+	        let filas = document.querySelectorAll('#tablaInstituciones tbody tr');
+
+	        filas.forEach(fila => {
+				// Obtenemos el texto de la columna 0 (Nombre) y la columna 1 (Siglas)
+				// Usamos el operador ? por si alguna celda llega a estar vacía
+			 	let institucion = fila.cells[0]?.textContent.toLowerCase() || "";
+				let siglas = fila.cells[1]?.textContent.toLowerCase() || "";
+
+	            // 4. Si el nombre contiene el texto del filtro, mostrar fila; si no, ocultarla
+	            if (institucion.includes(filtro) || siglas.includes(filtro)) {
+	                fila.style.display = "";
+	            } else {
+	                fila.style.display = "none";
+	            }
+	        });
+	    });
+	</script>
+	-->
+	
+	<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+	<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+	<script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+	<script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
+	<script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.bootstrap5.min.js"></script>
+	<script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
+	<script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js"></script>
+		
+	    <script>
+			$(document).ready(function() {
+				// Convierte nuestra tabla normal en una tabla con paginación
+			    $('#tablaInstituciones').DataTable({
+			        "pageLength": 5,// Mostrar 10 registros por página
+			        "dom": '<"d-flex justify-content-between"Bf>rtip', // Esto posiciona los botones (B) y el filtro (f)
+			        "buttons": [
+			            {
+			                extend: 'pdfHtml5',
+			                text: 'Exportar PDF',
+			                className: 'btn btn-danger', // Color rojo para el PDF
+			                title: 'Listado de Instituciones Públicas - Ecuador',
+			                exportOptions: {
+			                    columns: [0, 1, 2, 3] // Exporta las columnas 0 a 3
+			                },
+			                customize: function (doc) {
+			                    doc.content[1].table.widths = ['25%', '15%', '25%', '35%']; // Ajusta anchos de columnas en el PDF
+			                }
+			            },
+			            {
+			                extend: 'print',
+			                text: 'Imprimir',
+			                className: 'btn btn-info'
+			            },
+						{ 
+							extend: 'excelHtml5', 
+							text: 'Excel', 
+							className: 'btn btn-success',
+							title: 'Reporte de Instituciones'
+						}
+			        ],
+			        "language": {
+						// Traducimos los textos al español
+			            "url": "//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json"
+			        }
+			    });
+			});
+	    </script>
+	
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
