@@ -10,15 +10,24 @@ Este proyecto está construido con Gradle y sigue una arquitectura limpia y orga
   * JSON Processing (Jackson)
 
 📂 Estructura del Proyecto
+
   webservicelistaec/
   │── src/
+  
   │   ├── main/
+  
   │   │   ├── java/
+  
   │   │   └── resources/
+  
   │── build.gradle
+  
   │── settings.gradle
+  
   │── gradlew
+  
   │── gradlew.bat
+  
   │── README.md
 
 ⚙️ Requisitos Previos
@@ -61,13 +70,15 @@ Este proyecto está construido con Gradle y sigue una arquitectura limpia y orga
 
 🔐 Configuración
 
+
   Si el proyecto utiliza variables de entorno o configuración externa, puedes definirlas en:
+  
     src/main/resources/application.properties
 
 Ejemplo:
 
-server.port=9090
-spring.application.name=webservicelistaec
+  server.port=9090
+  spring.application.name=webservicelistaec
 
 📦 Buenas Prácticas Implementadas
   * por capas (Controller, Service, Repository)
@@ -77,14 +88,18 @@ spring.application.name=webservicelistaec
 
 
 👨‍💻 Autor
+
   Desarrollado por Xotta Studio & Ing. Xavier Aucanshala 
+  
   Desarrollo de software, infraestructura y soluciones tecnológicas.
 
 
 📄 Licencia
+
   Este proyecto está bajo la licencia MIT.
 
 📄 Contiene
+
   1. paginación
   2. buscador
   3. tabla dinamica
