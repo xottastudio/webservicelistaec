@@ -56,9 +56,11 @@ Este proyecto está construido con Gradle y sigue una arquitectura limpia y orga
       http://localhost:9090
 
 🛠️ Compilar el Proyecto
+
     gradlew build  
     
   El archivo .jar se generará en:
+  
     build/libs/
     
   Para ejecutarlo:
@@ -76,9 +78,8 @@ Este proyecto está construido con Gradle y sigue una arquitectura limpia y orga
     src/main/resources/application.properties
 
 Ejemplo:
-
-  server.port=9090
-  spring.application.name=webservicelistaec
+  * server.port=9090
+  * spring.application.name=webservicelistaec
 
 📦 Buenas Prácticas Implementadas
   * por capas (Controller, Service, Repository)
